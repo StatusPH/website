@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatusPH - Executive Portfolio Websites</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS reset & variables */
+        :root {
+            --primary: #112A46;
+            --primary-light: #1A3C63;
+            --secondary: #707781;
+            --bg-light: #F8F9FA;
+            --bg-white: #FFFFFF;
+            --text-dark: #1B1C1E;
+            --text-light: #5C636D;
+            --font-heading: 'DM Serif Display', serif;
+            --font-body: 'DM Sans', sans-serif;
+            --spacing-unit: 1rem;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: var(--bg-light);
+            font-size: 16px; /* Base 16px for readability */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Layout & Container - Fluid Boundaries */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--bg-white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-height: 44px; /* Touch friendly */
+        }
+        
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .nav-links {
+            display: none; /* hidden on mobile, shown on desktop */
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--text-light);
+            margin-left: 2rem;
+            transition: color 0.3s;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px; /* Touch friendly */
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 44px; /* Touch friendly */
+            height: 44px; /* Touch friendly */
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+            transition: 0.3s;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            min-height: 44px; /* Touch friendly */
+            min-width: 44px; /* Touch friendly */
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--bg-white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+            color: var(--bg-white);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light) 100%);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 2.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background-color: var(--bg-white);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile first: stack vertically */
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--bg-light);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: transform 0.3s;
+            border-top: 4px solid var(--primary);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+        }
+
+        /* Process Section */
+        .process {
+            padding: 5rem 0;
+            background-color: var(--bg-light);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Mobile first: stack vertically */
+            gap: 2rem;
+        }
+
+        .process-step {
+            background-color: var(--bg-white);
+            padding: 2.5rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background-color: var(--primary);
+            color: var(--bg-white);
+            border-radius: 50%;
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .process-step h3 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--bg-white);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .footer-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px; /* Touch friendly */
+            min-width: 44px; /* Touch friendly */
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .footer-bottom {
+            font-size: 0.875rem;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+        }
+
+        /* Mobile Menu Overlay */
+        .mobile-menu {
+            display: none; 
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-white);
+            padding: 1.5rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+            z-index: 99;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            min-height: 44px; /* Touch friendly */
+            border-radius: 4px;
+            background-color: var(--bg-light);
+        }
+
+        /* Desktop Breakpoints - Progressive Enhancement */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.25rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hamburger {
+                display: none; /* Hide on desktop */
+            }
+
+            .nav-links {
+                display: flex; /* Show full nav on desktop */
+                align-items: center;
+            }
+            
+            .mobile-menu {
+                display: none !important; /* Force hide mobile menu */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="StatusPH" onerror="this.style.display='none'">
+                StatusPH
+            </a>
+            
+            <nav class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#process">How It Works</a>
+                <a href="https://www.facebook.com/profile.php?id=61566078136167" target="_blank" class="btn btn-primary" style="margin-left: 2rem; color: #FFF;">Get Started</a>
+            </nav>
+
+            <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-menu" id="mobileMenu">
+        <a href="#services">Services</a>
+        <a href="#process">How It Works</a>
+        <a href="https://www.facebook.com/profile.php?id=61566078136167" target="_blank" style="background-color: var(--primary); color: white; justify-content: center; margin-top: 1rem;">Get Started</a>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Tired of applying without replies?</h1>
+                <p>We turn ignored resumes into high-end websites that get you hired. Elevate your professional identity with our premium executive portfolios.</p>
+                <a href="https://www.facebook.com/profile.php?id=61566078136167" target="_blank" class="btn btn-primary">Message Us Today</a>
+            </div>
+        </section>
+
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">Our Services</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <h3>High-end Portfolio Websites</h3>
+                        <p>Bespoke, mobile-responsive single-page websites that showcase your career achievements, skills, and professional brand in an executive format.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Print-Ready CVs</h3>
+                        <p>Beautifully formatted, fixed A4 canvas PDF resumes that perfectly match your website's branding for a cohesive professional presentation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="process" class="process">
+            <div class="container">
+                <h2 class="section-title">How It Works</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h3>Data Collection</h3>
+                        <p>You provide your professional history, skills, and summary through our simple onboarding form.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h3>We Build</h3>
+                        <p>Our experts craft your digital identity, translating your data into a stunning web presence using premium design.</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h3>Launch</h3>
+                        <p>We deliver your hosted portfolio website and a companion print-ready CV, ready to share with recruiters.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">StatusPH</div>
+            <div class="footer-links">
+                <a href="https://www.facebook.com/profile.php?id=61566078136167" target="_blank" rel="noopener noreferrer" aria-label="Facebook Page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 StatusPH. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
